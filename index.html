@@ -2,1019 +2,227 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-<meta name="description" content="Enter the darkness. Welcome to The Night Goblin.">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080807">
+<meta name="description" content="The Night Goblin — born in darkness.">
 <title>THE NIGHT GOBLIN — $BOO</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
-:root {
-    --bg: #080808;
-    --panel: #101010;
-    --white: #f4f1eb;
-    --muted: #85817b;
-    --orange: #ff781e;
-    --silver: #bdbdbd;
-    --border: rgba(255,255,255,.12);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-
-body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse at 50% 30%,
-        rgba(255,120,30,.08), transparent 50%),
-        linear-gradient(180deg, #090909, #050505);
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-}
-
-.container {
-    width: min(1160px, 90%);
-    margin: auto;
-}
-
-/* BACKGROUND EFFECTS */
-
-.ambient {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.ambient::before,
-.ambient::after {
-    content: "";
-    position: absolute;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    filter: blur(110px);
-    opacity: .08;
-    background: var(--orange);
-    animation: ambientMove 12s ease-in-out infinite alternate;
-}
-
-.ambient::before {
-    top: 10%;
-    left: -250px;
-}
-
-.ambient::after {
-    bottom: 5%;
-    right: -280px;
-    animation-delay: -6s;
-}
-
-@keyframes ambientMove {
-    from { transform: translateY(-30px); }
-    to { transform: translateY(100px); }
-}
-
-.noise {
-    position: fixed;
-    inset: 0;
-    z-index: 10;
-    pointer-events: none;
-    opacity: .035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
-}
-
-/* NAVIGATION */
-
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(8,8,8,.82);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--border);
-}
-
-.nav-inner {
-    min-height: 76px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-.brand-mark {
-    width: 36px;
-    height: 36px;
-    border: 1px solid #5b5046;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: var(--orange);
-    font-family: 'Creepster', cursive;
-    font-size: 23px;
-    box-shadow: 0 0 18px rgba(255,120,30,.12);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.nav-links a {
-    font-size: 11px;
-    font-weight: 700;
-    color: #aaa;
-    letter-spacing: 1.5px;
-    transition: .25s;
-}
-
-.nav-links a:hover {
-    color: var(--orange);
-}
-
-.nav-cta {
-    padding: 12px 18px;
-    border: 1px solid #55483c;
-    color: var(--white) !important;
-    background: rgba(255,120,30,.06);
-}
-
-.menu-toggle {
-    display: none;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: white;
-    padding: 10px 13px;
-    cursor: pointer;
-}
-
-/* HERO */
-
-.hero {
-    position: relative;
-    min-height: 720px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: auto 0 0;
-    height: 220px;
-    background: linear-gradient(transparent, var(--bg));
-    z-index: 2;
-    pointer-events: none;
-}
-
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 20px;
-    padding-top: 55px;
-    padding-bottom: 90px;
-}
-
-.eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--orange);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-.eyebrow::before {
-    content: "";
-    width: 26px;
-    height: 1px;
-    background: var(--orange);
-}
-
-.hero h1 {
-    margin-top: 28px;
-    font-size: clamp(54px, 7.2vw, 96px);
-    font-weight: 900;
-    letter-spacing: -6px;
-    line-height: .91;
-}
-
-.hero h1 span {
-    display: block;
-}
-
-.hero h1 .accent {
-    color: transparent;
-    -webkit-text-stroke: 1px var(--silver);
-    text-shadow: 0 0 30px rgba(255,255,255,.04);
-}
-
-.hero-copy {
-    max-width: 440px;
-    margin-top: 26px;
-    color: #99948e;
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-}
-
-.btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 15px 23px;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    transition: transform .25s, background .25s, border-color .25s;
-    cursor: pointer;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-}
-
-.btn-primary {
-    color: #120b07;
-    background: var(--orange);
-    border: 1px solid var(--orange);
-}
-
-.btn-primary:hover {
-    background: #ff944b;
-}
-
-.btn-secondary {
-    border: 1px solid #49433d;
-    background: rgba(255,255,255,.025);
-    color: var(--white);
-}
-
-.btn-secondary:hover {
-    border-color: var(--orange);
-}
-
-.hero-note {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 36px;
-    color: #6f6b66;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
-
-.status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--orange);
-    box-shadow: 0 0 12px var(--orange);
-}
-
-/* GOBLIN ARTWORK */
-
-.hero-art {
-    position: relative;
-    min-width: 0;
-    display: grid;
-    place-items: center;
-}
-
-.moon {
-    position: absolute;
-    width: 310px;
-    height: 310px;
-    border-radius: 50%;
-    background:
-        radial-gradient(circle at 35% 30%,
-        #e4ded0, #8f8980 48%, #252321 72%);
-    opacity: .12;
-    filter: blur(1px);
-}
-
-.art-glow {
-    position: absolute;
-    width: 70%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: rgba(255,91,10,.1);
-    filter: blur(65px);
-    animation: glowPulse 4s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0%, 100% { opacity: .45; transform: scale(.9); }
-    50% { opacity: .9; transform: scale(1.08); }
-}
-
-.goblin-image {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    max-width: 510px;
-    max-height: 570px;
-    object-fit: contain;
-    filter: drop-shadow(0 20px 45px rgba(0,0,0,.65));
-    animation: goblinFloat 5s ease-in-out infinite;
-}
-
-@keyframes goblinFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.art-label {
-    position: absolute;
-    z-index: 3;
-    right: 0;
-    bottom: 35px;
-    border: 1px solid rgba(255,255,255,.14);
-    background: rgba(10,10,10,.82);
-    backdrop-filter: blur(12px);
-    padding: 15px 18px;
-}
-
-.art-label small {
-    display: block;
-    color: #777;
-    font-size: 9px;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-}
-
-.art-label strong {
-    font-size: 13px;
-    letter-spacing: 2px;
-}
-
-/* TICKER */
-
-.ticker {
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-    background: #0d0d0d;
-}
-
-.ticker-track {
-    display: flex;
-    width: max-content;
-    padding: 20px 0;
-    animation: tickerMove 32s linear infinite;
-}
-
-.ticker-track span {
-    padding: 0 32px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #77716b;
-}
-
-.ticker-track b {
-    color: var(--orange);
-    margin-right: 12px;
-}
-
-@keyframes tickerMove {
-    to { transform: translateX(-50%); }
-}
-
-/* SECTIONS */
-
-section.content-section {
-    padding: 110px 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.section-heading {
-    max-width: 680px;
-    margin-bottom: 50px;
-}
-
-.section-heading h2 {
-    margin-top: 18px;
-    font-size: clamp(34px, 5vw, 56px);
-    line-height: 1;
-    letter-spacing: -2px;
-    font-weight: 900;
-}
-
-.section-heading p {
-    margin-top: 20px;
-    max-width: 540px;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-.info-card {
-    position: relative;
-    padding: 32px;
-    border: 1px solid var(--border);
-    background: linear-gradient(135deg, #111, #090909);
-    overflow: hidden;
-    transition: border-color .3s, transform .3s;
-}
-
-.info-card:hover {
-    border-color: rgba(255,120,30,.4);
-    transform: translateY(-4px);
-}
-
-.info-card .number {
-    color: var(--orange);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 3px;
-}
-
-.info-card h3 {
-    margin-top: 23px;
-    font-size: 22px;
-    letter-spacing: -.5px;
-}
-
-.info-card p {
-    margin-top: 12px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
-}
-
-.token-panel {
-    padding: 38px;
-    border: 1px solid var(--border);
-    background:
-        radial-gradient(ellipse at 100% 0, rgba(255,120,30,.08), transparent 55%),
-        #0d0d0d;
-}
-
-.token-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 35px;
-}
-
-.token-top h3 {
-    font-size: 24px;
-}
-
-.token-top p {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 8px;
-}
-
-.token-badge {
-    border: 1px solid #59412f;
-    padding: 10px 14px;
-    color: var(--orange);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.token-row {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 15px;
-    align-items: center;
-    padding: 20px 0;
-    border-top: 1px solid var(--border);
-}
-
-.token-row span {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.token-row strong {
-    font-size: 12px;
-    text-align: right;
-    overflow-wrap: anywhere;
-}
-
-.copy-btn {
-    border: 1px solid #51483f;
-    color: var(--white);
-    background: transparent;
-    padding: 10px 13px;
-    font-size: 10px;
-    cursor: pointer;
-}
-
-.copy-btn:hover {
-    border-color: var(--orange);
-}
-
-/* ROADMAP */
-
-.roadmap {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.roadmap-card {
-    padding: 28px;
-    border: 1px solid var(--border);
-    background: #0c0c0c;
-}
-
-.roadmap-card .phase {
-    color: var(--orange);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 2px;
-}
-
-.roadmap-card h3 {
-    margin-top: 18px;
-    font-size: 20px;
-}
-
-.roadmap-card ul {
-    list-style: none;
-    margin-top: 22px;
-}
-
-.roadmap-card li {
-    position: relative;
-    padding: 11px 0 11px 17px;
-    border-top: 1px solid rgba(255,255,255,.07);
-    color: #938e88;
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-.roadmap-card li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 17px;
-    width: 5px;
-    height: 5px;
-    background: var(--orange);
-}
-
-/* COMMUNITY */
-
-.community-box {
-    position: relative;
-    text-align: center;
-    padding: 75px 30px;
-    border: 1px solid rgba(255,120,30,.24);
-    background:
-        radial-gradient(ellipse at 50% 100%, rgba(255,120,30,.1), transparent 65%),
-        #0b0b0b;
-}
-
-.community-box h2 {
-    font-size: clamp(36px, 6vw, 65px);
-    font-weight: 900;
-    letter-spacing: -3px;
-}
-
-.community-box p {
-    max-width: 490px;
-    margin: 20px auto 28px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
-}
-
-.community-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-/* FOOTER */
-
-footer {
-    padding: 32px 0;
-}
-
-.footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.footer-copy {
-    color: #66615c;
-    font-size: 10px;
-    letter-spacing: 1px;
-    line-height: 2;
-}
-
-.footer-name {
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: 2px;
-}
-
-/* REVEAL */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity .7s ease, transform .7s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 800px) {
-    .nav-inner {
-        min-height: 68px;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-        padding: 22px 5%;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        background: rgba(8,8,8,.98);
-        border-bottom: 1px solid var(--border);
-    }
-
-    .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links a {
-        padding: 16px 0;
-        border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-
-    .nav-links .nav-cta {
-        margin-top: 14px;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .hero {
-        min-height: auto;
-    }
-
-    .hero-grid {
-        grid-template-columns: 1fr;
-        padding-top: 75px;
-        padding-bottom: 65px;
-    }
-
-    .hero-copy {
-        max-width: 540px;
-    }
-
-    .hero-art {
-        margin-top: 15px;
-    }
-
-    .goblin-image {
-        max-width: 430px;
-        max-height: 470px;
-    }
-
-    .moon {
-        width: 240px;
-        height: 240px;
-    }
-
-    .art-label {
-        right: 4%;
-        bottom: 15px;
-    }
-
-    section.content-section {
-        padding: 80px 0;
-    }
-
-    .about-grid,
-    .roadmap {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        width: 90%;
-    }
-
-    .brand {
-        font-size: 11px;
-        letter-spacing: 1.5px;
-    }
-
-    .hero h1 {
-        font-size: clamp(52px, 14vw, 70px);
-        letter-spacing: -3px;
-    }
-
-    .hero-copy {
-        font-size: 13px;
-    }
-
-    .btn {
-        padding: 14px 16px;
-        font-size: 10px;
-    }
-
-    .hero-buttons .btn {
-        flex: 1;
-    }
-
-    .goblin-image {
-        max-width: 100%;
-    }
-
-    .section-heading h2 {
-        letter-spacing: -1px;
-    }
-
-    .info-card,
-    .token-panel,
-    .roadmap-card {
-        padding: 24px;
-    }
-
-    .token-top {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .token-row {
-        grid-template-columns: 1fr;
-    }
-
-    .token-row strong {
-        text-align: left;
-    }
-
-    .community-box {
-        padding: 55px 20px;
-    }
-
-    .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-    }
-
-    .reveal {
-        opacity: 1;
-        transform: none;
-    }
-}
+:root{--bg:#080807;--panel:#11100f;--text:#f4f0e8;--muted:#9a9389;--orange:#ff7418;--line:rgba(255,255,255,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:82px}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1160px,90%);margin:auto}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 78% 34%,rgba(255,93,14,.09),transparent 38%),radial-gradient(ellipse at 15% 70%,rgba(120,75,40,.06),transparent 42%),#080807}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.nav{position:sticky;top:0;z-index:20;background:rgba(8,8,7,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.navin{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:900;letter-spacing:2.4px}
+.brandicon{width:42px;height:42px;border:1px solid #5e4938;border-radius:50%;display:grid;place-items:center;color:var(--orange);font-weight:1000;font-size:23px;text-shadow:0 0 14px #ff7418;box-shadow:0 0 22px #ff741815}
+.links{display:flex;align-items:center;gap:27px}
+.links a{font-size:10px;letter-spacing:1.5px;font-weight:800;color:#aaa39a;transition:.2s}
+.links a:hover{color:var(--orange)}
+.links .navcta{padding:13px 16px;border:1px solid #5d4734;color:#fff;background:#ff74180b}
+.menu{display:none;background:transparent;border:1px solid var(--line);color:#fff;padding:12px 15px}
+.hero{position:relative;min-height:660px;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center;padding:64px 0 80px}
+.kicker{display:flex;align-items:center;gap:10px;color:var(--orange);font-size:10px;font-weight:900;letter-spacing:3px}
+.kicker:before{content:"";width:26px;height:1px;background:var(--orange)}
+h1{font-size:clamp(55px,7.3vw,96px);line-height:.91;letter-spacing:-5px;font-weight:1000;margin:27px 0}
+h1 span{display:block}
+h1 .outline{color:transparent;-webkit-text-stroke:1px #c9c2b8}
+.intro{max-width:460px;color:var(--muted);font-size:14px;line-height:1.9}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 19px;font-size:10px;font-weight:900;letter-spacing:1.4px;border:1px solid #574635;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-3px)}
+.primary{background:var(--orange);border-color:var(--orange);color:#130b05}
+.secondary{background:#ffffff04}
+.note{display:flex;align-items:center;gap:10px;margin-top:32px;color:#777168;font-size:9px;letter-spacing:1.7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange)}
+.art{position:relative;display:grid;place-items:center;min-width:0;isolation:isolate}
+.moon{position:absolute;width:min(72%,330px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ddd1bb,#65584b 48%,#211a15 70%);opacity:.12}
+.artglow{position:absolute;width:65%;aspect-ratio:1;border-radius:50%;background:#ff5a0c1c;filter:blur(48px);animation:pulse 4s ease-in-out infinite}
+.goblin{width:100%;max-width:535px;position:relative;z-index:1;filter:drop-shadow(0 24px 30px #000b);animation:float 5s ease-in-out infinite}
+.artlabel{position:absolute;right:0;bottom:25px;z-index:2;padding:14px 17px;border:1px solid #ffffff24;background:#0b0b0be8;backdrop-filter:blur(10px)}
+.artlabel small{display:block;font-size:9px;color:#8e857b;letter-spacing:2px;margin-bottom:6px}
+.artlabel strong{font-size:12px;letter-spacing:2px}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(.5deg)}}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+.ticker{overflow:hidden;background:#0c0c0b;border-bottom:1px solid var(--line)}
+.track{display:flex;width:max-content;animation:marquee 34s linear infinite;padding:19px 0}
+.track span{padding:0 28px;color:#81796f;font-size:10px;letter-spacing:2.5px;font-weight:900;white-space:nowrap}
+.track b{color:var(--orange);margin-right:10px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+section.content{padding:100px 0;border-bottom:1px solid var(--line)}
+.heading{max-width:670px;margin-bottom:42px}
+.heading h2{font-size:clamp(36px,5vw,60px);line-height:.98;letter-spacing:-2.7px;margin-top:18px}
+.heading p{margin-top:18px;color:var(--muted);font-size:13px;line-height:1.9;max-width:560px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{padding:29px;border:1px solid var(--line);background:linear-gradient(135deg,#12110f,#0b0b0a);transition:.25s}
+.card:hover{border-color:#ff74185c;transform:translateY(-3px)}
+.num,.phase{color:var(--orange);font-size:10px;font-weight:900;letter-spacing:2.4px}
+.card h3{font-size:22px;margin-top:20px}
+.card p{font-size:13px;line-height:1.9;color:var(--muted);margin-top:11px}
+.tokenbox{padding:32px;border:1px solid var(--line);background:radial-gradient(ellipse at 100% 0,#ff74180d,transparent 55%),#0d0d0c}
+.tokentop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+.tokentop h3{font-size:22px}
+.tokentop p{color:var(--muted);font-size:12px;margin-top:8px}
+.badge{border:1px solid #62462e;color:var(--orange);padding:10px 12px;font-size:10px;font-weight:900;letter-spacing:2px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0;border-top:1px solid var(--line);font-size:12px}
+.row span{color:var(--muted)}
+.row strong{text-align:right;overflow-wrap:anywhere}
+.roadmap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.phasecard{padding:26px;border:1px solid var(--line);background:#0c0c0b}
+.phasecard h3{font-size:19px;margin:18px 0}
+.phasecard ul{list-style:none}
+.phasecard li{padding:12px 0 12px 15px;border-top:1px solid #ffffff0c;position:relative;color:#a19a90;font-size:12px;line-height:1.7}
+.phasecard li:before{content:"";position:absolute;left:0;top:19px;width:5px;height:5px;background:var(--orange)}
+.community{text-align:center;padding:68px 25px;border:1px solid #ff74183b;background:radial-gradient(ellipse at 50% 100%,#ff741815,transparent 65%),#0c0c0b}
+.community h2{font-size:clamp(36px,5.5vw,64px);letter-spacing:-3px;line-height:1.05;margin-top:18px}
+.community p{max-width:490px;margin:18px auto 25px;color:var(--muted);font-size:13px;line-height:1.9}
+footer{padding:30px 0}
+.foot{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.footname{font-size:12px;font-weight:900;letter-spacing:2px}
+.footnote{font-size:10px;color:#716a61;line-height:1.9;margin-top:7px}
+.reveal{opacity:1;transform:none}
+@media(min-width:801px){.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s}.js .reveal.show{opacity:1;transform:none}}
+@media(max-width:800px){
+ .navin{min-height:70px}.menu{display:block}.links{display:none;position:absolute;top:70px;left:0;right:0;background:#090908;padding:18px 5%;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.links.open{display:flex}.links a{padding:15px 0;border-bottom:1px solid #ffffff0c}.links .navcta{text-align:center;margin-top:12px;padding:14px}
+ .hero{min-height:0}.hero-grid{grid-template-columns:1fr;padding:62px 0 55px}.hero-copy{max-width:570px}.art{margin-top:8px}.goblin{max-width:440px}.artlabel{right:3%;bottom:15px}
+ section.content{padding:76px 0}.roadmap{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+ .wrap{width:90%}.brand{font-size:10px;letter-spacing:1.6px;gap:9px}.brandicon{width:38px;height:38px}
+ h1{font-size:clamp(52px,14vw,70px);letter-spacing:-3px}.intro{font-size:13px}.btn{padding:14px 13px;font-size:9px}.actions .btn{flex:1}
+ .goblin{max-width:100%}.cards{grid-template-columns:1fr}.card,.tokenbox,.phasecard{padding:23px}.tokentop{align-items:flex-start;flex-direction:column}.row{align-items:flex-start;flex-direction:column;gap:8px}.row strong{text-align:left}.community{padding:48px 18px}.community h2{letter-spacing:-1.8px}.foot{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.js .reveal{opacity:1;transform:none}}
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
-
 <body>
-
-<div class="ambient"></div>
-<div class="noise"></div>
-
-<!-- NAVIGATION -->
-<header class="navbar">
-    <div class="container nav-inner">
-
-        <a class="brand" href="#home">
-            <span class="brand-mark">G</span>
-            <span>THE NIGHT GOBLIN</span>
-        </a>
-
-        <button class="menu-toggle"
-                id="menuToggle"
-                aria-label="Toggle navigation"
-                aria-expanded="false">
-            MENU
-        </button>
-
-        <nav class="nav-links" id="navLinks">
-            <a href="#home">HOME</a>
-            <a href="#lore">LORE</a>
-            <a href="#token">TOKEN</a>
-            <a href="#roadmap">ROADMAP</a>
-            <a class="nav-cta" href="#community">ENTER THE DARKNESS ↗</a>
-        </nav>
-
-    </div>
+<div class="grain"></div>
+<header class="nav">
+ <div class="wrap navin">
+  <a class="brand" href="#home"><span class="brandicon">G</span><span>THE NIGHT GOBLIN</span></a>
+  <button class="menu" id="menu" aria-expanded="false">MENU</button>
+  <nav class="links" id="links">
+   <a href="#home">HOME</a><a href="#lore">LORE</a><a href="#token">TOKEN</a><a href="#roadmap">ROADMAP</a><a class="navcta" href="#community">ENTER THE DARKNESS ↗</a>
+  </nav>
+ </div>
 </header>
-
 <main>
-
-<!-- HERO -->
 <section class="hero" id="home">
-    <div class="container hero-grid">
-
-        <div class="hero-content reveal">
-
-            <div class="eyebrow">
-                THE DARKNESS HAS A NAME
-            </div>
-
-            <h1>
-                <span>THE NIGHT</span>
-                <span class="accent">GOBLIN.</span>
-            </h1>
-
-            <p class="hero-copy">
-                Born in the shadows. Forged in the darkness.
-                A creature of the night enters the digital realm.
-                Welcome to a world where legends never sleep.
-            </p>
-
-            <div class="hero-buttons">
-                <a class="btn btn-primary" href="#lore">
-                    DISCOVER THE LORE ↗
-                </a>
-
-                <a class="btn btn-secondary" href="#token">
-                    EXPLORE $BOO
-                </a>
-            </div>
-
-            <div class="hero-note">
-                <span class="status-dot"></span>
-                <span>THE NIGHT IS JUST BEGINNING</span>
-            </div>
-
-        </div>
-
-        <div class="hero-art reveal">
-
-            <div class="moon"></div>
-            <div class="art-glow"></div>
-
-            <!--
-            TARUH GAMBAR GOBLIN DI:
-            assets/night-goblin.png
-
-            Jika nama atau lokasi gambar berbeda,
-            ubah nilai src di bawah.
-            -->
-
-            <img
-                class="goblin-image"
-                src="assets/night-goblin.png"
-                alt="The Night Goblin"
-                fetchpriority="high"
-                onerror="this.style.display='none';document.getElementById('artFallback').style.display='flex';"
-            >
-
-            <!-- Placeholder jika gambar belum dipasang -->
-            <div id="artFallback"
-                 style="display:none;position:relative;z-index:1;width:100%;min-height:300px;align-items:center;justify-content:center;text-align:center;color:#ff781e;">
-                <div>
-                    <div style="font-family:Creepster,cursive;font-size:100px;">G</div>
-                    <p style="font-size:10px;letter-spacing:3px;color:#85817b;">
-                        ADD YOUR GOBLIN ARTWORK
-                    </p>
-                </div>
-            </div>
-
-            <div class="art-label">
-                <small>IDENTITY</small>
-                <strong>THE UNKNOWN</strong>
-            </div>
-
-        </div>
-
-    </div>
+ <div class="wrap hero-grid">
+  <div class="reveal">
+   <div class="kicker">THE DARKNESS HAS A NAME</div>
+   <h1><span>THE NIGHT</span><span class="outline">GOBLIN.</span></h1>
+   <p class="intro">Born in the shadows. Forged in the darkness. A creature of the night enters the digital realm. Welcome to a world where legends never sleep.</p>
+   <div class="actions"><a class="btn primary" href="#lore">DISCOVER THE LORE ↗</a><a class="btn secondary" href="#token">EXPLORE $BOO</a></div>
+   <div class="note"><span class="dot"></span>THE NIGHT IS JUST BEGINNING</div>
+  </div>
+  <div class="art reveal">
+   <div class="moon"></div><div class="artglow"></div>
+   <!-- Self-contained original goblin illustration: no extra image file required -->
+   <svg class="goblin" viewBox="0 0 560 620" role="img" aria-label="Original dark fantasy Night Goblin with glowing orange eyes" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+     <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6e7567"/><stop offset=".35" stop-color="#30382f"/><stop offset=".72" stop-color="#171c19"/><stop offset="1" stop-color="#080a09"/></linearGradient>
+     <linearGradient id="ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#454b3c"/><stop offset="1" stop-color="#101411"/></linearGradient>
+     <linearGradient id="hood" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#45413b"/><stop offset=".35" stop-color="#1b1a18"/><stop offset="1" stop-color="#050505"/></linearGradient>
+     <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b5b0a6"/><stop offset=".3" stop-color="#464541"/><stop offset=".7" stop-color="#171716"/><stop offset="1" stop-color="#8b8378"/></linearGradient>
+     <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff1a3"/><stop offset=".35" stop-color="#ff9a23"/><stop offset="1" stop-color="#f23c08"/></linearGradient>
+     <radialGradient id="eyeGlow"><stop stop-color="#ff8a22" stop-opacity=".8"/><stop offset="1" stop-color="#ff4d00" stop-opacity="0"/></radialGradient>
+     <filter id="blur"><feGaussianBlur stdDeviation="14"/></filter>
+     <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"/></filter>
+    </defs>
+    <!-- ember halo -->
+    <ellipse cx="282" cy="500" rx="170" ry="45" fill="#ff5b0b" opacity=".12" filter="url(#blur)"/>
+    <!-- jagged hood silhouette -->
+    <path d="M142 566 Q113 493 132 407 L95 450 113 362 78 389 112 293 102 235 153 269 Q162 169 241 111 L282 71 313 119 Q396 139 423 240 L461 212 443 286 483 310 448 356 463 423 429 409 Q456 503 421 566Z" fill="#050606" stroke="#45413a" stroke-width="3"/>
+    <path d="M152 540 Q137 449 162 366 L139 389 158 299 Q176 210 250 157 L280 120 309 159 Q383 183 405 281 L427 258 411 335 432 367 408 385 Q431 468 405 541Z" fill="url(#hood)" stroke="#6d6253" stroke-opacity=".45" stroke-width="2"/>
+    <!-- hood folds -->
+    <path d="M177 243 Q143 355 178 474 L158 512 Q157 402 167 338Z" fill="#8c8170" opacity=".17"/>
+    <path d="M372 211 Q414 323 383 441 L407 492 Q418 382 394 293Z" fill="#b0a28e" opacity=".1"/>
+    <path d="M207 173 Q174 260 197 319 M350 187 Q386 251 371 300" fill="none" stroke="#a39a8b" stroke-opacity=".18" stroke-width="5"/>
+    <!-- pointed ears -->
+    <path d="M185 278 Q111 225 42 211 Q72 291 171 347 L204 334Z" fill="url(#ear)" stroke="#858274" stroke-opacity=".5" stroke-width="3"/>
+    <path d="M158 300 L79 238 Q114 289 173 324Z" fill="#a34a27" opacity=".48"/>
+    <path d="M371 278 Q444 224 514 211 Q486 292 386 348 L355 332Z" fill="url(#ear)" stroke="#858274" stroke-opacity=".5" stroke-width="3"/>
+    <path d="M399 301 L480 238 Q443 290 384 325Z" fill="#a34a27" opacity=".4"/>
+    <!-- neck and shoulders -->
+    <path d="M208 399 L191 465 145 502 116 581 Q280 632 444 579 L415 500 368 466 351 397Z" fill="url(#skin)" stroke="#4b5145" stroke-width="3"/>
+    <!-- armor collar -->
+    <path d="M183 441 L232 469 279 450 326 470 378 438 408 502 350 535 280 514 211 537 151 500Z" fill="url(#metal)" stroke="#797267" stroke-width="3"/>
+    <path d="M208 466 L240 491 280 473 321 492 357 466" fill="none" stroke="#c4b9a5" stroke-opacity=".35" stroke-width="3"/>
+    <!-- face -->
+    <path d="M191 252 Q210 194 278 190 Q349 196 371 253 L359 347 Q343 398 282 422 Q222 401 202 349Z" fill="url(#skin)" stroke="#737665" stroke-width="3"/>
+    <!-- brow / forehead -->
+    <path d="M195 273 L218 235 257 248 280 231 305 249 345 234 367 276 332 269 302 278 279 267 249 280 220 268Z" fill="#101410" stroke="#777666" stroke-width="3"/>
+    <path d="M242 215 L260 246 M316 214 L301 246" stroke="#9b9a81" stroke-opacity=".4" stroke-width="4"/>
+    <!-- eye glow -->
+    <ellipse cx="238" cy="302" rx="49" ry="38" fill="url(#eyeGlow)"/>
+    <ellipse cx="324" cy="302" rx="49" ry="38" fill="url(#eyeGlow)"/>
+    <!-- angry eye sockets -->
+    <path d="M204 291 L249 281 267 302 246 321 211 312Z" fill="#080a08" stroke="#777360" stroke-width="2"/>
+    <path d="M294 302 L312 281 355 291 348 312 314 321Z" fill="#080a08" stroke="#777360" stroke-width="2"/>
+    <path d="M213 299 L245 291 257 303 242 312 216 309Z" fill="url(#eye)"/>
+    <path d="M302 303 L315 291 346 299 343 309 317 312Z" fill="url(#eye)"/>
+    <path d="M221 301 L243 298 M310 301 L338 301" stroke="#fff0a5" stroke-width="2" opacity=".9"/>
+    <!-- nose -->
+    <path d="M271 294 L257 338 279 350 297 338 286 294Z" fill="#1b211b" stroke="#646957" stroke-width="2"/>
+    <path d="M263 338 L278 342 291 337" fill="none" stroke="#a5a08b" stroke-opacity=".55" stroke-width="2"/>
+    <!-- cheek planes -->
+    <path d="M204 324 L231 340 251 330 243 365 218 354Z" fill="#101511" stroke="#6d7160" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M352 324 L327 340 307 330 316 365 339 354Z" fill="#101511" stroke="#6d7160" stroke-opacity=".5" stroke-width="2"/>
+    <!-- mouth and fangs -->
+    <path d="M229 367 Q280 391 336 366 L326 390 Q280 411 239 390Z" fill="#080807" stroke="#8b806b" stroke-width="2"/>
+    <path d="M245 375 L253 394 263 380 M315 375 L306 394 296 380" fill="#d9d0b8" stroke="#f0e7d0" stroke-width="1"/>
+    <path d="M263 393 L280 398 299 391" fill="none" stroke="#ff7418" stroke-opacity=".6" stroke-width="2"/>
+    <!-- cheek scars -->
+    <path d="M218 338 L231 350 M225 334 L237 346 M338 337 L326 350" stroke="#c0a78a" stroke-opacity=".5" stroke-width="2"/>
+    <!-- hood edge -->
+    <path d="M169 278 Q175 203 244 161 L280 133 309 164 Q379 199 390 278" fill="none" stroke="#827565" stroke-opacity=".7" stroke-width="5"/>
+    <!-- forehead metal emblem -->
+    <path d="M280 202 L292 221 280 239 268 221Z" fill="url(#metal)" stroke="#a99e8b" stroke-width="2"/>
+    <path d="M280 211 L280 230" stroke="#ff7418" stroke-width="2"/>
+    <!-- shoulder armor -->
+    <path d="M146 502 L190 481 224 510 213 555 161 568 126 545Z" fill="url(#metal)" stroke="#777064" stroke-width="3"/>
+    <path d="M414 502 L371 481 338 510 349 555 400 568 435 545Z" fill="url(#metal)" stroke="#777064" stroke-width="3"/>
+    <path d="M145 525 L184 507 204 521 M415 525 L377 507 356 521" fill="none" stroke="#c3b9a8" stroke-opacity=".5" stroke-width="3"/>
+    <!-- small spikes -->
+    <path d="M165 492 L155 459 188 484 M395 492 L406 459 373 484" fill="#252521" stroke="#8a8171" stroke-width="2"/>
+    <!-- chest sigil -->
+    <path d="M280 514 L302 540 280 571 258 540Z" fill="#11110f" stroke="#9b8d78" stroke-width="2"/>
+    <path d="M280 524 L280 555 M268 540 L292 540" stroke="#ff7418" stroke-width="3"/>
+    <!-- edge highlights -->
+    <path d="M152 536 Q140 462 164 379 M406 535 Q421 464 395 379" fill="none" stroke="#b6a48c" stroke-opacity=".28" stroke-width="3"/>
+    <!-- floating embers -->
+    <g fill="#ff7418">
+      <circle cx="115" cy="357" r="3"/><circle cx="440" cy="400" r="2.5"/><circle cx="168" cy="180" r="2"/><circle cx="398" cy="169" r="2.5"/><circle cx="103" cy="476" r="2"/><circle cx="454" cy="301" r="3"/>
+    </g>
+   </svg>
+   <div class="artlabel"><small>IDENTITY</small><strong>THE UNKNOWN</strong></div>
+  </div>
+ </div>
 </section>
-
-<!-- MOVING TICKER -->
-<div class="ticker" aria-label="The Night Goblin">
-    <div class="ticker-track">
-        <span><b>✦</b> WELCOME TO THE DARKNESS</span>
-        <span><b>✦</b> THE NIGHT GOBLIN</span>
-        <span><b>✦</b> SHADOWS NEVER SLEEP</span>
-        <span><b>✦</b> $BOO</span>
-
-        <span><b>✦</b> WELCOME TO THE DARKNESS</span>
-        <span><b>✦</b> THE NIGHT GOBLIN</span>
-        <span><b>✦</b> SHADOWS NEVER SLEEP</span>
-        <span><b>✦</b> $BOO</span>
-    </div>
-</div>
-
-<!-- LORE -->
-<section class="content-section" id="lore">
-    <div class="container">
-
-        <div class="section-heading reveal">
-            <div class="eyebrow">BEHIND THE SHADOWS</div>
-            <h2>EVERY LEGEND<br>STARTS IN DARKNESS.</h2>
-
-            <p>
-                Deep beyond the moonlight, a forgotten creature
-                awakens. The Night Goblin represents the mystery,
-                creativity, and rebellious spirit of the digital night.
-            </p>
-        </div>
-
-        <div class="about-grid">
-
-            <article class="info-card reveal">
-                <div class="number">01 / THE ORIGIN</div>
-                <h3>Born After Midnight</h3>
-                <p>
-                    From the deepest corners of the night emerges
-                    a character unlike any other. A legend built
-                    around mystery and imagination.
-                </p>
-            </article>
-
-            <article class="info-card reveal">
-         
+<div class="ticker"><div class="track">
+ <span><b>✦</b> WELCOME TO THE DARKNESS</span><span><b>✦</b> THE NIGHT GOBLIN</span><span><b>✦</b> SHADOWS NEVER SLEEP</span><span><b>✦</b> $BOO</span>
+ <span><b>✦</b> WELCOME TO THE DARKNESS</span><span><b>✦</b> THE NIGHT GOBLIN</span><span><b>✦</b> SHADOWS NEVER SLEEP</span><span><b>✦</b> $BOO</span>
+</div></div>
+<section class="content" id="lore"><div class="wrap">
+ <div class="heading reveal"><div class="kicker">BEHIND THE SHADOWS</div><h2>EVERY LEGEND<br>STARTS IN DARKNESS.</h2><p>Deep beyond the moonlight, a forgotten creature awakens. The Night Goblin embodies mystery, creativity, and the rebellious spirit of the digital night.</p></div>
+ <div class="cards">
+  <article class="card reveal"><div class="num">01 / THE ORIGIN</div><h3>Born After Midnight</h3><p>From the deepest corners of the night emerges a character unlike any other. A legend built around mystery and imagination.</p></article>
+  <article class="card reveal"><div class="num">02 / THE SPIRIT</div><h3>Fear Nothing</h3><p>The shadows are not the enemy. They are where the bold discover their identity and the unusual becomes unforgettable.</p></article>
+ </div>
+</div></section>
+<section class="content" id="token"><div class="wrap">
+ <div class="heading reveal"><div class="kicker">THE DIGITAL IDENTITY</div><h2>MEET THE<br>$BOO TOKEN.</h2><p>Token information is shown transparently. Verify the official contract address before interacting with any token.</p></div>
+ <div class="tokenbox reveal"><div class="tokentop"><div><h3>THE NIGHT GOBLIN</h3><p>Token ticker: $BOO</p></div><div class="badge">SOLANA</div></div>
+  <div class="row"><span>Token name</span><strong>THE NIGHT GOBLIN</strong></div><div class="row"><span>Ticker</span><strong>$BOO</strong></div><div class="row"><span>Blockchain</span><strong>Solana</strong></div><div class="row"><span>Contract address</span><strong>Not provided</strong></div>
+ </div>
+</div></section>
+<section class="content" id="roadmap"><div class="wrap">
+ <div class="heading reveal"><div class="kicker">THE PATH AHEAD</div><h2>T
