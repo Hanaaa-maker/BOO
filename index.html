@@ -1,514 +1,1020 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#09080d">
-<meta name="description" content="THE NIGHT GOBLIN ($BOO) — A Halloween-inspired Solana community token concept.">
-<title>THE NIGHT GOBLIN ($BOO) | Solana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<meta name="description" content="Enter the darkness. Welcome to The Night Goblin.">
+
+<title>THE NIGHT GOBLIN — $BOO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg:#09080d;
-  --panel:#121117;
-  --silver:#e3e0e9;
-  --muted:#a29cab;
-  --orange:#ff792d;
-  --purple:#9b70ff;
-  --line:#302b38;
+    --bg: #080808;
+    --panel: #101010;
+    --white: #f4f1eb;
+    --muted: #85817b;
+    --orange: #ff781e;
+    --silver: #bdbdbd;
+    --border: rgba(255,255,255,.12);
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
 body {
-  margin:0;
-  color:var(--silver);
-  background:radial-gradient(ellipse at 50% 0%,#28182f 0%,var(--bg) 48%);
-  font-family:Arial,Helvetica,sans-serif;
-  overflow-x:hidden;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
-a { color:inherit;text-decoration:none; }
-button { font:inherit;cursor:pointer; }
-.wrap { width:min(1120px,90%);margin:auto; }
-header {
-  position:sticky;top:0;z-index:20;
-  background:#09080deF;
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 30%,
+        rgba(255,120,30,.08), transparent 50%),
+        linear-gradient(180deg, #090909, #050505);
 }
-.nav {
-  min-height:72px;display:flex;align-items:center;
-  justify-content:space-between;gap:20px;
+
+a {
+    color: inherit;
+    text-decoration: none;
 }
+
+button {
+    font: inherit;
+}
+
+.container {
+    width: min(1160px, 90%);
+    margin: auto;
+}
+
+/* BACKGROUND EFFECTS */
+
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.ambient::before,
+.ambient::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: .08;
+    background: var(--orange);
+    animation: ambientMove 12s ease-in-out infinite alternate;
+}
+
+.ambient::before {
+    top: 10%;
+    left: -250px;
+}
+
+.ambient::after {
+    bottom: 5%;
+    right: -280px;
+    animation-delay: -6s;
+}
+
+@keyframes ambientMove {
+    from { transform: translateY(-30px); }
+    to { transform: translateY(100px); }
+}
+
+.noise {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+
+/* NAVIGATION */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(8,8,8,.82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+    min-height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
 .brand {
-  font-size:14px;font-weight:900;letter-spacing:1.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
-.brand b { color:var(--orange); }
-nav { display:flex;gap:24px;align-items:center; }
-nav a { font-size:12px;color:#c5c0ce; }
-nav a:hover { color:var(--orange); }
-.menu {
-  display:none;background:transparent;color:white;
-  border:1px solid var(--line);padding:9px 12px;border-radius:6px;
+
+.brand-mark {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #5b5046;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--orange);
+    font-family: 'Creepster', cursive;
+    font-size: 23px;
+    box-shadow: 0 0 18px rgba(255,120,30,.12);
 }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    font-size: 11px;
+    font-weight: 700;
+    color: #aaa;
+    letter-spacing: 1.5px;
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: var(--orange);
+}
+
+.nav-cta {
+    padding: 12px 18px;
+    border: 1px solid #55483c;
+    color: var(--white) !important;
+    background: rgba(255,120,30,.06);
+}
+
+.menu-toggle {
+    display: none;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: white;
+    padding: 10px 13px;
+    cursor: pointer;
+}
+
+/* HERO */
+
 .hero {
-  min-height:620px;padding:70px 0;
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:center;gap:30px;
-  position:relative;
+    position: relative;
+    min-height: 720px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
 }
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 220px;
+    background: linear-gradient(transparent, var(--bg));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding-top: 55px;
+    padding-bottom: 90px;
+}
+
 .eyebrow {
-  font-size:10px;letter-spacing:4px;
-  color:var(--orange);font-weight:bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
-h1 {
-  font:400 clamp(52px,7.5vw,88px)/.94 Georgia,serif;
-  letter-spacing:-2px;margin:22px 0;
+
+.eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--orange);
 }
-h1 span {
-  display:block;color:var(--orange);
-  text-shadow:0 0 35px #ff792d45;
+
+.hero h1 {
+    margin-top: 28px;
+    font-size: clamp(54px, 7.2vw, 96px);
+    font-weight: 900;
+    letter-spacing: -6px;
+    line-height: .91;
 }
-.lead {
-  max-width:420px;color:var(--muted);
-  font-size:14px;line-height:1.9;
+
+.hero h1 span {
+    display: block;
 }
-.ticker {
-  display:inline-flex;align-items:center;gap:9px;
-  padding:7px 12px;border:1px solid #ff792d65;
-  background:#ff792d10;border-radius:4px;
-  color:var(--orange);font-weight:bold;font-size:13px;
-  letter-spacing:1px;
+
+.hero h1 .accent {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--silver);
+    text-shadow: 0 0 30px rgba(255,255,255,.04);
 }
-.ticker i {
-  width:7px;height:7px;border-radius:50%;
-  background:var(--orange);box-shadow:0 0 12px var(--orange);
+
+.hero-copy {
+    max-width: 440px;
+    margin-top: 26px;
+    color: #99948e;
+    font-size: 14px;
+    line-height: 1.9;
 }
-.actions { display:flex;gap:12px;flex-wrap:wrap;margin:28px 0; }
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
 .btn {
-  min-height:44px;padding:0 19px;border-radius:5px;
-  border:1px solid var(--line);display:inline-flex;
-  align-items:center;justify-content:center;
-  font-size:11px;font-weight:bold;letter-spacing:.4px;
-  transition:.2s;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 23px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    transition: transform .25s, background .25s, border-color .25s;
+    cursor: pointer;
 }
-.btn:hover { transform:translateY(-3px); }
-.primary { background:var(--silver);color:#100e13; }
-.secondary { background:#ffffff06; }
-.small-note { color:#777180;font-size:10px;line-height:1.7; }
 
-.art {
-  position:relative;min-height:440px;
-  display:grid;place-items:center;overflow:hidden;
-  background:radial-gradient(ellipse,#38253d 0%,#17121d 43%,#0a090e 75%);
-  border:1px solid #3c3445;border-radius:8px;
+.btn:hover {
+    transform: translateY(-3px);
 }
+
+.btn-primary {
+    color: #120b07;
+    background: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.btn-primary:hover {
+    background: #ff944b;
+}
+
+.btn-secondary {
+    border: 1px solid #49433d;
+    background: rgba(255,255,255,.025);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    border-color: var(--orange);
+}
+
+.hero-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 36px;
+    color: #6f6b66;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 12px var(--orange);
+}
+
+/* GOBLIN ARTWORK */
+
+.hero-art {
+    position: relative;
+    min-width: 0;
+    display: grid;
+    place-items: center;
+}
+
 .moon {
-  position:absolute;top:35px;
-  width:205px;height:205px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#fff5df,#bdb2c6 58%,#63576c);
-  box-shadow:0 0 60px #b8a5e044;
-  animation:pulse 5s ease-in-out infinite;
+    position: absolute;
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%,
+        #e4ded0, #8f8980 48%, #252321 72%);
+    opacity: .12;
+    filter: blur(1px);
 }
-.goblin {
-  z-index:2;position:relative;margin-top:110px;
-  width:245px;height:265px;
-  background:linear-gradient(135deg,#77717f,#27232e 38%,#0b0a0f 75%);
-  clip-path:polygon(13% 13%,0 0,31% 16%,50% 3%,69% 16%,100% 0,87% 19%,95% 63%,76% 90%,50% 100%,24% 90%,5% 63%);
-  filter:drop-shadow(0 15px 25px #000);
-  animation:float 4s ease-in-out infinite;
-}
-.face {
-  position:absolute;top:100px;left:50%;
-  transform:translateX(-50%);
-  width:145px;height:125px;
-  background:linear-gradient(140deg,#5e5965,#17141c 70%);
-  clip-path:polygon(8% 0,92% 0,100% 45%,72% 87%,50% 100%,28% 87%,0 45%);
-}
-.eye {
-  position:absolute;top:42px;width:30px;height:7px;
-  background:#ffb34f;border-radius:100%;
-  box-shadow:0 0 10px #ff792d,0 0 26px #ff792d;
-  animation:blink 4s infinite;
-}
-.eye.left { left:20px;transform:rotate(12deg); }
-.eye.right { right:20px;transform:rotate(-12deg); }
-.bat {
-  position:absolute;z-index:5;font-size:24px;
-  animation:fly 9s linear infinite;
-}
-.bat.one { top:24%;left:-15%; }
-.bat.two { top:58%;left:-25%;animation-delay:-4s;font-size:17px; }
-.bat.three { top:12%;left:-30%;animation-delay:-6s;font-size:19px; }
-.fog {
-  position:absolute;bottom:12%;left:-30%;width:160%;height:75px;
-  background:linear-gradient(90deg,transparent,#b2a2c52b,#e2d8ed16,transparent);
-  filter:blur(20px);
-  animation:fog 9s ease-in-out infinite alternate;
-}
-.art-label {
-  position:absolute;bottom:20px;z-index:3;
-  font-size:9px;letter-spacing:3px;color:#a59aaf;
-}
-.section { padding:75px 0;border-top:1px solid var(--line); }
-.heading { text-align:center;margin-bottom:35px; }
-h2 { font:400 clamp(30px,4vw,42px) Georgia,serif;margin:12px 0; }
-.description { color:var(--muted);font-size:13px;line-height:1.8; }
-.grid { display:grid;grid-template-columns:repeat(3,1fr);gap:15px; }
-.card {
-  padding:25px;background:linear-gradient(145deg,#ffffff08,#ffffff02);
-  border:1px solid var(--line);border-radius:8px;transition:.25s;
-}
-.card:hover { transform:translateY(-4px);border-color:#ff792d70; }
-.card .icon { font-size:27px; }
-.card h3 { font-size:14px; }
-.card p { color:var(--muted);font-size:12px;line-height:1.8; }
-.token-box {
-  max-width:720px;margin:auto;padding:26px;
-  border:1px solid var(--line);background:var(--panel);border-radius:8px;
-}
-.token-top {
-  display:flex;justify-content:space-between;align-items:center;
-  gap:12px;flex-wrap:wrap;
-}
-.label { color:var(--muted);font-size:11px; }
-.ca-row { display:flex;gap:9px;margin:12px 0; }
-.ca-value {
-  flex:1;min-width:0;overflow-wrap:anywhere;
-  background:#09080d;border:1px solid var(--line);
-  padding:13px;border-radius:4px;font-size:11px;color:#c3bdcc;
-}
-.copy {
-  background:var(--silver);color:#111;border:0;
-  padding:0 14px;border-radius:4px;font-size:11px;font-weight:bold;
-}
-.roadmap { max-width:650px;margin:auto; }
-.phase {
-  display:grid;grid-template-columns:16px 1fr;
-  gap:15px;padding-bottom:25px;
-}
-.dot {
-  width:11px;height:11px;border:2px solid var(--orange);
-  border-radius:50%;margin-top:4px;
-  box-shadow:0 0 10px #ff792d55;
-}
-.phase h3 { font-size:13px;margin:0 0 7px; }
-.phase p { color:var(--muted);font-size:12px;line-height:1.8;margin:0; }
-.cta {
-  text-align:center;padding:48px 20px;
-  border:1px solid #ff792d55;border-radius:8px;
-  background:radial-gradient(ellipse,#582c3029,transparent 75%);
-}
-footer { padding:28px 0;border-top:1px solid var(--line); }
-footer p { color:#817b89;font-size:10px;line-height:1.8; }
-.reveal { opacity:0;transform:translateY(18px);transition:.7s; }
-.reveal.visible { opacity:1;transform:translateY(0); }
-#particles { position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden; }
-.particle {
-  position:absolute;bottom:-15px;width:3px;height:3px;border-radius:50%;
-  background:#ff9c5b;box-shadow:0 0 8px #ff792d;
-  animation:rise linear infinite;
-}
-header,main,footer { position:relative;z-index:1; }
 
-@keyframes float {
-  0%,100% { transform:translateY(0) rotate(-1deg); }
-  50% { transform:translateY(-12px) rotate(1deg); }
+.art-glow {
+    position: absolute;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(255,91,10,.1);
+    filter: blur(65px);
+    animation: glowPulse 4s ease-in-out infinite;
 }
-@keyframes pulse {
-  0%,100% { box-shadow:0 0 50px #b8a5e033; }
-  50% { box-shadow:0 0 85px #b8a5e077; }
+
+@keyframes glowPulse {
+    0%, 100% { opacity: .45; transform: scale(.9); }
+    50% { opacity: .9; transform: scale(1.08); }
 }
-@keyframes blink {
-  0%,44%,48%,100% { opacity:1; }
-  46% { opacity:.1; }
+
+.goblin-image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    max-width: 510px;
+    max-height: 570px;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 45px rgba(0,0,0,.65));
+    animation: goblinFloat 5s ease-in-out infinite;
 }
-@keyframes fly {
-  from { transform:translateX(0) translateY(0); }
-  to { transform:translateX(125vw) translateY(-50px); }
+
+@keyframes goblinFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
-@keyframes fog {
-  from { transform:translateX(-7%);opacity:.4; }
-  to { transform:translateX(7%);opacity:.9; }
+
+.art-label {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 35px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(10,10,10,.82);
+    backdrop-filter: blur(12px);
+    padding: 15px 18px;
 }
-@keyframes rise {
-  from { transform:translateY(0);opacity:0; }
-  15% { opacity:.8; }
-  to { transform:translateY(-110vh);opacity:0; }
+
+.art-label small {
+    display: block;
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
 }
-@media(max-width:760px) {
-  .nav { min-height:64px; }
-  .menu { display:block; }
-  nav {
-    display:none;position:absolute;top:64px;left:0;right:0;
-    padding:20px 5%;background:#100e15;
-    flex-direction:column;align-items:flex-start;
-    border-bottom:1px solid var(--line);
-  }
-  nav.open { display:flex; }
-  .hero { grid-template-columns:1fr;text-align:center;padding:55px 0 45px;gap:10px; }
-  .lead { margin:auto; }
-  .actions { justify-content:center; }
-  .art { min-height:370px; }
-  .moon { width:180px;height:180px; }
-  .goblin { scale:.85; }
-  .grid { grid-template-columns:1fr; }
-  .section { padding:55px 0; }
-  .token-box { padding:19px; }
+
+.art-label strong {
+    font-size: 13px;
+    letter-spacing: 2px;
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
+
+/* TICKER */
+
+.ticker {
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: #0d0d0d;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    padding: 20px 0;
+    animation: tickerMove 32s linear infinite;
+}
+
+.ticker-track span {
+    padding: 0 32px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #77716b;
+}
+
+.ticker-track b {
+    color: var(--orange);
+    margin-right: 12px;
+}
+
+@keyframes tickerMove {
+    to { transform: translateX(-50%); }
+}
+
+/* SECTIONS */
+
+section.content-section {
+    padding: 110px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-heading {
+    max-width: 680px;
+    margin-bottom: 50px;
+}
+
+.section-heading h2 {
+    margin-top: 18px;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -2px;
+    font-weight: 900;
+}
+
+.section-heading p {
+    margin-top: 20px;
+    max-width: 540px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.info-card {
+    position: relative;
+    padding: 32px;
+    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #111, #090909);
+    overflow: hidden;
+    transition: border-color .3s, transform .3s;
+}
+
+.info-card:hover {
+    border-color: rgba(255,120,30,.4);
+    transform: translateY(-4px);
+}
+
+.info-card .number {
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.info-card h3 {
+    margin-top: 23px;
+    font-size: 22px;
+    letter-spacing: -.5px;
+}
+
+.info-card p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.token-panel {
+    padding: 38px;
+    border: 1px solid var(--border);
+    background:
+        radial-gradient(ellipse at 100% 0, rgba(255,120,30,.08), transparent 55%),
+        #0d0d0d;
+}
+
+.token-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.token-top h3 {
+    font-size: 24px;
+}
+
+.token-top p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.token-badge {
+    border: 1px solid #59412f;
+    padding: 10px 14px;
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.token-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 15px;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+}
+
+.token-row span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.token-row strong {
+    font-size: 12px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.copy-btn {
+    border: 1px solid #51483f;
+    color: var(--white);
+    background: transparent;
+    padding: 10px 13px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    border-color: var(--orange);
+}
+
+/* ROADMAP */
+
+.roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.roadmap-card {
+    padding: 28px;
+    border: 1px solid var(--border);
+    background: #0c0c0c;
+}
+
+.roadmap-card .phase {
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.roadmap-card h3 {
+    margin-top: 18px;
+    font-size: 20px;
+}
+
+.roadmap-card ul {
+    list-style: none;
+    margin-top: 22px;
+}
+
+.roadmap-card li {
+    position: relative;
+    padding: 11px 0 11px 17px;
+    border-top: 1px solid rgba(255,255,255,.07);
+    color: #938e88;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.roadmap-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 17px;
+    width: 5px;
+    height: 5px;
+    background: var(--orange);
+}
+
+/* COMMUNITY */
+
+.community-box {
+    position: relative;
+    text-align: center;
+    padding: 75px 30px;
+    border: 1px solid rgba(255,120,30,.24);
+    background:
+        radial-gradient(ellipse at 50% 100%, rgba(255,120,30,.1), transparent 65%),
+        #0b0b0b;
+}
+
+.community-box h2 {
+    font-size: clamp(36px, 6vw, 65px);
+    font-weight: 900;
+    letter-spacing: -3px;
+}
+
+.community-box p {
+    max-width: 490px;
+    margin: 20px auto 28px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.community-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 32px 0;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-copy {
+    color: #66615c;
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 2;
+}
+
+.footer-name {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+/* REVEAL */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .nav-inner {
+        min-height: 68px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 22px 5%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(8,8,8,.98);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-links .nav-cta {
+        margin-top: 14px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .hero {
+        min-height: auto;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        padding-top: 75px;
+        padding-bottom: 65px;
+    }
+
+    .hero-copy {
+        max-width: 540px;
+    }
+
+    .hero-art {
+        margin-top: 15px;
+    }
+
+    .goblin-image {
+        max-width: 430px;
+        max-height: 470px;
+    }
+
+    .moon {
+        width: 240px;
+        height: 240px;
+    }
+
+    .art-label {
+        right: 4%;
+        bottom: 15px;
+    }
+
+    section.content-section {
+        padding: 80px 0;
+    }
+
+    .about-grid,
+    .roadmap {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+    }
+
+    .brand {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+    }
+
+    .hero h1 {
+        font-size: clamp(52px, 14vw, 70px);
+        letter-spacing: -3px;
+    }
+
+    .hero-copy {
+        font-size: 13px;
+    }
+
+    .btn {
+        padding: 14px 16px;
+        font-size: 10px;
+    }
+
+    .hero-buttons .btn {
+        flex: 1;
+    }
+
+    .goblin-image {
+        max-width: 100%;
+    }
+
+    .section-heading h2 {
+        letter-spacing: -1px;
+    }
+
+    .info-card,
+    .token-panel,
+    .roadmap-card {
+        padding: 24px;
+    }
+
+    .token-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .token-row {
+        grid-template-columns: 1fr;
+    }
+
+    .token-row strong {
+        text-align: left;
+    }
+
+    .community-box {
+        padding: 55px 20px;
+    }
+
+    .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
 }
 </style>
 </head>
 
 <body>
-<div id="particles" aria-hidden="true"></div>
 
-<header>
-  <div class="wrap nav">
-    <a class="brand" href="#home">☾ THE NIGHT <b>GOBLIN</b></a>
-    <button class="menu" id="menu" aria-label="Toggle navigation"
-      aria-expanded="false">☰</button>
-    <nav id="nav">
-      <a href="#home">Home</a>
-      <a href="#lore">The Legend</a>
-      <a href="#token">Token</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#community">Community</a>
-    </nav>
-  </div>
+<div class="ambient"></div>
+<div class="noise"></div>
+
+<!-- NAVIGATION -->
+<header class="navbar">
+    <div class="container nav-inner">
+
+        <a class="brand" href="#home">
+            <span class="brand-mark">G</span>
+            <span>THE NIGHT GOBLIN</span>
+        </a>
+
+        <button class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
+            MENU
+        </button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">HOME</a>
+            <a href="#lore">LORE</a>
+            <a href="#token">TOKEN</a>
+            <a href="#roadmap">ROADMAP</a>
+            <a class="nav-cta" href="#community">ENTER THE DARKNESS ↗</a>
+        </nav>
+
+    </div>
 </header>
 
 <main>
-<section class="wrap hero" id="home">
-  <div>
-    <div class="eyebrow">HALLOWEEN EDITION · SOLANA</div>
-    <h1>THE NIGHT <span>GOBLIN</span></h1>
-    <div class="ticker"><i></i> $BOO · THE NIGHT IS OURS</div>
-    <p class="lead">
-      When the moon rises, the shadows awaken.
-      Enter the dark side of Solana.
-      One legend. One community. A night without end.
-    </p>
-    <div class="actions">
-      <a class="btn primary" href="#token">EXPLORE $BOO ↗</a>
-      <a class="btn secondary" href="#community">JOIN THE NIGHT</a>
-    </div>
-    <p class="small-note">
-      Halloween-inspired Solana meme token concept. DYOR.
-    </p>
-  </div>
 
-  <div class="art">
-    <div class="moon"></div>
-    <div class="goblin">
-      <div class="face">
-        <div class="eye left"></div>
-        <div class="eye right"></div>
-      </div>
-    </div>
-    <span class="bat one">🦇</span>
-    <span class="bat two">🦇</span>
-    <span class="bat three">🦇</span>
-    <div class="fog"></div>
-    <div class="art-label">THE SHADOWS ARE WATCHING</div>
-  </div>
-</section>
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container hero-grid">
 
-<section class="section" id="lore">
-  <div class="wrap">
-    <div class="heading reveal">
-      <div class="eyebrow">ENTER THE UNKNOWN</div>
-      <h2>The Legend Awakens</h2>
-      <p class="description">Not every shadow is empty. Not every legend is forgotten.</p>
-    </div>
-    <div class="grid">
-      <article class="card reveal">
-        <div class="icon">🌑</div>
-        <h3>Born in Darkness</h3>
-        <p>A mysterious goblin emerges beneath the Halloween moon.</p>
-      </article>
-      <article class="card reveal">
-        <div class="icon">🦇</div>
-        <h3>Creatures of the Night</h3>
-        <p>Follow the bats and become part of the $BOO story.</p>
-      </article>
-      <article class="card reveal">
-        <div class="icon">🎃</div>
-        <h3>Fearlessly Different</h3>
-        <p>A dark visual identity for a community that stands out.</p>
-      </article>
-    </div>
-  </div>
-</section>
+        <div class="hero-content reveal">
 
-<section class="section" id="token">
-  <div class="wrap">
-    <div class="heading reveal">
-      <div class="eyebrow">BUILT AROUND SOLANA</div>
-      <h2>Meet $BOO</h2>
-      <p class="description">Official token details will be added when confirmed.</p>
-    </div>
-    <div class="token-box reveal">
-      <div class="token-top">
-        <div>
-          <div class="label">TOKEN NAME</div>
-          <h3>THE NIGHT GOBLIN</h3>
+            <div class="eyebrow">
+                THE DARKNESS HAS A NAME
+            </div>
+
+            <h1>
+                <span>THE NIGHT</span>
+                <span class="accent">GOBLIN.</span>
+            </h1>
+
+            <p class="hero-copy">
+                Born in the shadows. Forged in the darkness.
+                A creature of the night enters the digital realm.
+                Welcome to a world where legends never sleep.
+            </p>
+
+            <div class="hero-buttons">
+                <a class="btn btn-primary" href="#lore">
+                    DISCOVER THE LORE ↗
+                </a>
+
+                <a class="btn btn-secondary" href="#token">
+                    EXPLORE $BOO
+                </a>
+            </div>
+
+            <div class="hero-note">
+                <span class="status-dot"></span>
+                <span>THE NIGHT IS JUST BEGINNING</span>
+            </div>
+
         </div>
-        <div class="ticker"><i></i> $BOO</div>
-      </div>
-      <p class="label">BLOCKCHAIN</p>
-      <p>Solana</p>
-      <p class="label">CONTRACT ADDRESS</p>
-      <div class="ca-row">
-        <div class="ca-value" id="ca">Not announced yet</div>
-        <button class="copy" id="copy">COPY</button>
-      </div>
-      <p class="small-note" id="copyStatus" aria-live="polite">
-        Contract address not provided yet. No address has been invented.
-      </p>
-      <p class="label">TOKENOMICS</p>
-      <p class="description">
-        Supply and allocation details will be published after verification.
-      </p>
+
+        <div class="hero-art reveal">
+
+            <div class="moon"></div>
+            <div class="art-glow"></div>
+
+            <!--
+            TARUH GAMBAR GOBLIN DI:
+            assets/night-goblin.png
+
+            Jika nama atau lokasi gambar berbeda,
+            ubah nilai src di bawah.
+            -->
+
+            <img
+                class="goblin-image"
+                src="assets/night-goblin.png"
+                alt="The Night Goblin"
+                fetchpriority="high"
+                onerror="this.style.display='none';document.getElementById('artFallback').style.display='flex';"
+            >
+
+            <!-- Placeholder jika gambar belum dipasang -->
+            <div id="artFallback"
+                 style="display:none;position:relative;z-index:1;width:100%;min-height:300px;align-items:center;justify-content:center;text-align:center;color:#ff781e;">
+                <div>
+                    <div style="font-family:Creepster,cursive;font-size:100px;">G</div>
+                    <p style="font-size:10px;letter-spacing:3px;color:#85817b;">
+                        ADD YOUR GOBLIN ARTWORK
+                    </p>
+                </div>
+            </div>
+
+            <div class="art-label">
+                <small>IDENTITY</small>
+                <strong>THE UNKNOWN</strong>
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </section>
 
-<section class="section" id="roadmap">
-  <div class="wrap">
-    <div class="heading reveal">
-      <div class="eyebrow">THE JOURNEY</div>
-      <h2>Roadmap</h2>
-      <p class="description">Proposed milestones, subject to actual project progress.</p>
+<!-- MOVING TICKER -->
+<div class="ticker" aria-label="The Night Goblin">
+    <div class="ticker-track">
+        <span><b>✦</b> WELCOME TO THE DARKNESS</span>
+        <span><b>✦</b> THE NIGHT GOBLIN</span>
+        <span><b>✦</b> SHADOWS NEVER SLEEP</span>
+        <span><b>✦</b> $BOO</span>
+
+        <span><b>✦</b> WELCOME TO THE DARKNESS</span>
+        <span><b>✦</b> THE NIGHT GOBLIN</span>
+        <span><b>✦</b> SHADOWS NEVER SLEEP</span>
+        <span><b>✦</b> $BOO</span>
     </div>
-    <div class="roadmap">
-      <div class="phase reveal">
-        <div class="dot"></div>
-        <div><h3>01 — The Awakening</h3>
-          <p>Website, visual identity, and community foundations.</p></div>
-      </div>
-      <div class="phase reveal">
-        <div class="dot"></div>
-        <div><h3>02 — Gathering the Night</h3>
-          <p>Halloween artwork, social content, and community campaigns.</p></div>
-      </div>
-      <div class="phase reveal">
-        <div class="dot"></div>
-        <div><h3>03 — The Reveal</h3>
-          <p>Publish verified contract details and official project links.</p></div>
-      </div>
-      <div class="phase reveal">
-        <div class="dot"></div>
-        <div><h3>04 — Beyond Halloween</h3>
-          <p>Keep the story alive with new community-led ideas.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
-<section class="section" id="community">
-  <div class="wrap">
-    <div class="cta reveal">
-      <div class="eyebrow">THE NIGHT IS CALLING</div>
-      <h2>Ready to Say $BOO?</h2>
-      <p class="description">
-        Every legend begins in the shadows.<br>
-        The next chapter is waiting to be written.
-      </p>
-      <span class="ticker"><i></i> $BOO · ENTER THE NIGHT</span>
-      <p class="small-note" id="communityStatus">
-        Official community links will be added when available.
-      </p>
-    </div>
-  </div>
-</section>
-</main>
+<!-- LORE -->
+<section class="content-section" id="lore">
+    <div class="container">
 
-<footer>
-  <div class="wrap">
-    <div class="brand">THE NIGHT <b>GOBLIN</b> · $BOO</div>
-    <p>Made for the night. Built for the community.</p>
-    <p>Solana · Halloween Edition · DYOR</p>
-    <p class="small-note">A meme-token concept. No financial returns are promised.</p>
-  </div>
-</footer>
+        <div class="section-heading reveal">
+            <div class="eyebrow">BEHIND THE SHADOWS</div>
+            <h2>EVERY LEGEND<br>STARTS IN DARKNESS.</h2>
 
-<script>
-const menu = document.getElementById("menu");
-const nav = document.getElementById("nav");
+            <p>
+                Deep beyond the moonlight, a forgotten creature
+                awakens. The Night Goblin represents the mystery,
+                creativity, and rebellious spirit of the digital night.
+            </p>
+        </div>
 
-menu.addEventListener("click", () => {
-  const open = nav.classList.toggle("open");
-  menu.setAttribute("aria-expanded", String(open));
-});
+        <div class="about-grid">
 
-nav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-    menu.setAttribute("aria-expanded", "false");
-  });
-});
+            <article class="info-card reveal">
+                <div class="number">01 / THE ORIGIN</div>
+                <h3>Born After Midnight</h3>
+                <p>
+                    From the deepest corners of the night emerges
+                    a character unlike any other. A legend built
+                    around mystery and imagination.
+                </p>
+            </article>
 
-// Smooth reveal while scrolling
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-} else {
-  document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
-}
-
-// Floating Halloween particles
-const area = document.getElementById("particles");
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-).matches;
-
-if (!reducedMotion) {
-  for (let i = 0; i < 22; i++) {
-    const p = document.createElement("span");
-    p.className = "particle";
-    p.style.left = Math.random() * 100 + "%";
-    p.style.animationDuration = (8 + Math.random() * 14) + "s";
-    p.style.animationDelay = (-Math.random() * 18) + "s";
-    area.appendChild(p);
-  }
-}
-
-// Copy CA only after a real address is added to the HTML
-document.getElementById("copy").addEventListener("click", async () => {
-  const ca = document.getElementById("ca").textContent.trim();
-  const status = document.getElementById("copyStatus");
-
-  if (!ca || ca === "Not announced yet") {
-    status.textContent =
-      "No contract address yet. Add the verified CA before copying.";
-    return;
-  }
-
-  try {
-    await navigator.clipboard.writeText(ca);
-    status.textContent = "Contract address copied.";
-  } catch {
-    status.textContent =
-      "Copy unavailable. Please copy the address manually.";
-  }
-});
-</script>
-</body>
-  </html>
-  
+            <article class="info-card reveal">
+         
