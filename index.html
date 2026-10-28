@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09080d">
+<meta name="description" content="THE NIGHT GOBLIN ($BOO) — A Halloween-inspired Solana community token concept.">
+<title>THE NIGHT GOBLIN ($BOO) | Solana</title>
+
+<style>
+:root {
+  --bg:#09080d;
+  --panel:#121117;
+  --silver:#e3e0e9;
+  --muted:#a29cab;
+  --orange:#ff792d;
+  --purple:#9b70ff;
+  --line:#302b38;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--silver);
+  background:radial-gradient(ellipse at 50% 0%,#28182f 0%,var(--bg) 48%);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+a { color:inherit;text-decoration:none; }
+button { font:inherit;cursor:pointer; }
+.wrap { width:min(1120px,90%);margin:auto; }
+header {
+  position:sticky;top:0;z-index:20;
+  background:#09080deF;
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav {
+  min-height:72px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.brand {
+  font-size:14px;font-weight:900;letter-spacing:1.5px;
+}
+.brand b { color:var(--orange); }
+nav { display:flex;gap:24px;align-items:center; }
+nav a { font-size:12px;color:#c5c0ce; }
+nav a:hover { color:var(--orange); }
+.menu {
+  display:none;background:transparent;color:white;
+  border:1px solid var(--line);padding:9px 12px;border-radius:6px;
+}
+.hero {
+  min-height:620px;padding:70px 0;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:30px;
+  position:relative;
+}
+.eyebrow {
+  font-size:10px;letter-spacing:4px;
+  color:var(--orange);font-weight:bold;
+}
+h1 {
+  font:400 clamp(52px,7.5vw,88px)/.94 Georgia,serif;
+  letter-spacing:-2px;margin:22px 0;
+}
+h1 span {
+  display:block;color:var(--orange);
+  text-shadow:0 0 35px #ff792d45;
+}
+.lead {
+  max-width:420px;color:var(--muted);
+  font-size:14px;line-height:1.9;
+}
+.ticker {
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 12px;border:1px solid #ff792d65;
+  background:#ff792d10;border-radius:4px;
+  color:var(--orange);font-weight:bold;font-size:13px;
+  letter-spacing:1px;
+}
+.ticker i {
+  width:7px;height:7px;border-radius:50%;
+  background:var(--orange);box-shadow:0 0 12px var(--orange);
+}
+.actions { display:flex;gap:12px;flex-wrap:wrap;margin:28px 0; }
+.btn {
+  min-height:44px;padding:0 19px;border-radius:5px;
+  border:1px solid var(--line);display:inline-flex;
+  align-items:center;justify-content:center;
+  font-size:11px;font-weight:bold;letter-spacing:.4px;
+  transition:.2s;
+}
+.btn:hover { transform:translateY(-3px); }
+.primary { background:var(--silver);color:#100e13; }
+.secondary { background:#ffffff06; }
+.small-note { color:#777180;font-size:10px;line-height:1.7; }
+
+.art {
+  position:relative;min-height:440px;
+  display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(ellipse,#38253d 0%,#17121d 43%,#0a090e 75%);
+  border:1px solid #3c3445;border-radius:8px;
+}
+.moon {
+  position:absolute;top:35px;
+  width:205px;height:205px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff5df,#bdb2c6 58%,#63576c);
+  box-shadow:0 0 60px #b8a5e044;
+  animation:pulse 5s ease-in-out infinite;
+}
+.goblin {
+  z-index:2;position:relative;margin-top:110px;
+  width:245px;height:265px;
+  background:linear-gradient(135deg,#77717f,#27232e 38%,#0b0a0f 75%);
+  clip-path:polygon(13% 13%,0 0,31% 16%,50% 3%,69% 16%,100% 0,87% 19%,95% 63%,76% 90%,50% 100%,24% 90%,5% 63%);
+  filter:drop-shadow(0 15px 25px #000);
+  animation:float 4s ease-in-out infinite;
+}
+.face {
+  position:absolute;top:100px;left:50%;
+  transform:translateX(-50%);
+  width:145px;height:125px;
+  background:linear-gradient(140deg,#5e5965,#17141c 70%);
+  clip-path:polygon(8% 0,92% 0,100% 45%,72% 87%,50% 100%,28% 87%,0 45%);
+}
+.eye {
+  position:absolute;top:42px;width:30px;height:7px;
+  background:#ffb34f;border-radius:100%;
+  box-shadow:0 0 10px #ff792d,0 0 26px #ff792d;
+  animation:blink 4s infinite;
+}
+.eye.left { left:20px;transform:rotate(12deg); }
+.eye.right { right:20px;transform:rotate(-12deg); }
+.bat {
+  position:absolute;z-index:5;font-size:24px;
+  animation:fly 9s linear infinite;
+}
+.bat.one { top:24%;left:-15%; }
+.bat.two { top:58%;left:-25%;animation-delay:-4s;font-size:17px; }
+.bat.three { top:12%;left:-30%;animation-delay:-6s;font-size:19px; }
+.fog {
+  position:absolute;bottom:12%;left:-30%;width:160%;height:75px;
+  background:linear-gradient(90deg,transparent,#b2a2c52b,#e2d8ed16,transparent);
+  filter:blur(20px);
+  animation:fog 9s ease-in-out infinite alternate;
+}
+.art-label {
+  position:absolute;bottom:20px;z-index:3;
+  font-size:9px;letter-spacing:3px;color:#a59aaf;
+}
+.section { padding:75px 0;border-top:1px solid var(--line); }
+.heading { text-align:center;margin-bottom:35px; }
+h2 { font:400 clamp(30px,4vw,42px) Georgia,serif;margin:12px 0; }
+.description { color:var(--muted);font-size:13px;line-height:1.8; }
+.grid { display:grid;grid-template-columns:repeat(3,1fr);gap:15px; }
+.card {
+  padding:25px;background:linear-gradient(145deg,#ffffff08,#ffffff02);
+  border:1px solid var(--line);border-radius:8px;transition:.25s;
+}
+.card:hover { transform:translateY(-4px);border-color:#ff792d70; }
+.card .icon { font-size:27px; }
+.card h3 { font-size:14px; }
+.card p { color:var(--muted);font-size:12px;line-height:1.8; }
+.token-box {
+  max-width:720px;margin:auto;padding:26px;
+  border:1px solid var(--line);background:var(--panel);border-radius:8px;
+}
+.token-top {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;flex-wrap:wrap;
+}
+.label { color:var(--muted);font-size:11px; }
+.ca-row { display:flex;gap:9px;margin:12px 0; }
+.ca-value {
+  flex:1;min-width:0;overflow-wrap:anywhere;
+  background:#09080d;border:1px solid var(--line);
+  padding:13px;border-radius:4px;font-size:11px;color:#c3bdcc;
+}
+.copy {
+  background:var(--silver);color:#111;border:0;
+  padding:0 14px;border-radius:4px;font-size:11px;font-weight:bold;
+}
+.roadmap { max-width:650px;margin:auto; }
+.phase {
+  display:grid;grid-template-columns:16px 1fr;
+  gap:15px;padding-bottom:25px;
+}
+.dot {
+  width:11px;height:11px;border:2px solid var(--orange);
+  border-radius:50%;margin-top:4px;
+  box-shadow:0 0 10px #ff792d55;
+}
+.phase h3 { font-size:13px;margin:0 0 7px; }
+.phase p { color:var(--muted);font-size:12px;line-height:1.8;margin:0; }
+.cta {
+  text-align:center;padding:48px 20px;
+  border:1px solid #ff792d55;border-radius:8px;
+  background:radial-gradient(ellipse,#582c3029,transparent 75%);
+}
+footer { padding:28px 0;border-top:1px solid var(--line); }
+footer p { color:#817b89;font-size:10px;line-height:1.8; }
+.reveal { opacity:0;transform:translateY(18px);transition:.7s; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+#particles { position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden; }
+.particle {
+  position:absolute;bottom:-15px;width:3px;height:3px;border-radius:50%;
+  background:#ff9c5b;box-shadow:0 0 8px #ff792d;
+  animation:rise linear infinite;
+}
+header,main,footer { position:relative;z-index:1; }
+
+@keyframes float {
+  0%,100% { transform:translateY(0) rotate(-1deg); }
+  50% { transform:translateY(-12px) rotate(1deg); }
+}
+@keyframes pulse {
+  0%,100% { box-shadow:0 0 50px #b8a5e033; }
+  50% { box-shadow:0 0 85px #b8a5e077; }
+}
+@keyframes blink {
+  0%,44%,48%,100% { opacity:1; }
+  46% { opacity:.1; }
+}
+@keyframes fly {
+  from { transform:translateX(0) translateY(0); }
+  to { transform:translateX(125vw) translateY(-50px); }
+}
+@keyframes fog {
+  from { transform:translateX(-7%);opacity:.4; }
+  to { transform:translateX(7%);opacity:.9; }
+}
+@keyframes rise {
+  from { transform:translateY(0);opacity:0; }
+  15% { opacity:.8; }
+  to { transform:translateY(-110vh);opacity:0; }
+}
+@media(max-width:760px) {
+  .nav { min-height:64px; }
+  .menu { display:block; }
+  nav {
+    display:none;position:absolute;top:64px;left:0;right:0;
+    padding:20px 5%;background:#100e15;
+    flex-direction:column;align-items:flex-start;
+    border-bottom:1px solid var(--line);
+  }
+  nav.open { display:flex; }
+  .hero { grid-template-columns:1fr;text-align:center;padding:55px 0 45px;gap:10px; }
+  .lead { margin:auto; }
+  .actions { justify-content:center; }
+  .art { min-height:370px; }
+  .moon { width:180px;height:180px; }
+  .goblin { scale:.85; }
+  .grid { grid-template-columns:1fr; }
+  .section { padding:55px 0; }
+  .token-box { padding:19px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div id="particles" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home">☾ THE NIGHT <b>GOBLIN</b></a>
+    <button class="menu" id="menu" aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+    <nav id="nav">
+      <a href="#home">Home</a>
+      <a href="#lore">The Legend</a>
+      <a href="#token">Token</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#community">Community</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="wrap hero" id="home">
+  <div>
+    <div class="eyebrow">HALLOWEEN EDITION · SOLANA</div>
+    <h1>THE NIGHT <span>GOBLIN</span></h1>
+    <div class="ticker"><i></i> $BOO · THE NIGHT IS OURS</div>
+    <p class="lead">
+      When the moon rises, the shadows awaken.
+      Enter the dark side of Solana.
+      One legend. One community. A night without end.
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#token">EXPLORE $BOO ↗</a>
+      <a class="btn secondary" href="#community">JOIN THE NIGHT</a>
+    </div>
+    <p class="small-note">
+      Halloween-inspired Solana meme token concept. DYOR.
+    </p>
+  </div>
+
+  <div class="art">
+    <div class="moon"></div>
+    <div class="goblin">
+      <div class="face">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+      </div>
+    </div>
+    <span class="bat one">🦇</span>
+    <span class="bat two">🦇</span>
+    <span class="bat three">🦇</span>
+    <div class="fog"></div>
+    <div class="art-label">THE SHADOWS ARE WATCHING</div>
+  </div>
+</section>
+
+<section class="section" id="lore">
+  <div class="wrap">
+    <div class="heading reveal">
+      <div class="eyebrow">ENTER THE UNKNOWN</div>
+      <h2>The Legend Awakens</h2>
+      <p class="description">Not every shadow is empty. Not every legend is forgotten.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="icon">🌑</div>
+        <h3>Born in Darkness</h3>
+        <p>A mysterious goblin emerges beneath the Halloween moon.</p>
+      </article>
+      <article class="card reveal">
+        <div class="icon">🦇</div>
+        <h3>Creatures of the Night</h3>
+        <p>Follow the bats and become part of the $BOO story.</p>
+      </article>
+      <article class="card reveal">
+        <div class="icon">🎃</div>
+        <h3>Fearlessly Different</h3>
+        <p>A dark visual identity for a community that stands out.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="token">
+  <div class="wrap">
+    <div class="heading reveal">
+      <div class="eyebrow">BUILT AROUND SOLANA</div>
+      <h2>Meet $BOO</h2>
+      <p class="description">Official token details will be added when confirmed.</p>
+    </div>
+    <div class="token-box reveal">
+      <div class="token-top">
+        <div>
+          <div class="label">TOKEN NAME</div>
+          <h3>THE NIGHT GOBLIN</h3>
+        </div>
+        <div class="ticker"><i></i> $BOO</div>
+      </div>
+      <p class="label">BLOCKCHAIN</p>
+      <p>Solana</p>
+      <p class="label">CONTRACT ADDRESS</p>
+      <div class="ca-row">
+        <div class="ca-value" id="ca">Not announced yet</div>
+        <button class="copy" id="copy">COPY</button>
+      </div>
+      <p class="small-note" id="copyStatus" aria-live="polite">
+        Contract address not provided yet. No address has been invented.
+      </p>
+      <p class="label">TOKENOMICS</p>
+      <p class="description">
+        Supply and allocation details will be published after verification.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="heading reveal">
+      <div class="eyebrow">THE JOURNEY</div>
+      <h2>Roadmap</h2>
+      <p class="description">Proposed milestones, subject to actual project progress.</p>
+    </div>
+    <div class="roadmap">
+      <div class="phase reveal">
+        <div class="dot"></div>
+        <div><h3>01 — The Awakening</h3>
+          <p>Website, visual identity, and community foundations.</p></div>
+      </div>
+      <div class="phase reveal">
+        <div class="dot"></div>
+        <div><h3>02 — Gathering the Night</h3>
+          <p>Halloween artwork, social content, and community campaigns.</p></div>
+      </div>
+      <div class="phase reveal">
+        <div class="dot"></div>
+        <div><h3>03 — The Reveal</h3>
+          <p>Publish verified contract details and official project links.</p></div>
+      </div>
+      <div class="phase reveal">
+        <div class="dot"></div>
+        <div><h3>04 — Beyond Halloween</h3>
+          <p>Keep the story alive with new community-led ideas.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="community">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div class="eyebrow">THE NIGHT IS CALLING</div>
+      <h2>Ready to Say $BOO?</h2>
+      <p class="description">
+        Every legend begins in the shadows.<br>
+        The next chapter is waiting to be written.
+      </p>
+      <span class="ticker"><i></i> $BOO · ENTER THE NIGHT</span>
+      <p class="small-note" id="communityStatus">
+        Official community links will be added when available.
+      </p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">THE NIGHT <b>GOBLIN</b> · $BOO</div>
+    <p>Made for the night. Built for the community.</p>
+    <p>Solana · Halloween Edition · DYOR</p>
+    <p class="small-note">A meme-token concept. No financial returns are promised.</p>
+  </div>
+</footer>
+
+<script>
+const menu = document.getElementById("menu");
+const nav = document.getElementById("nav");
+
+menu.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  menu.setAttribute("aria-expanded", String(open));
+});
+
+nav.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
+    menu.setAttribute("aria-expanded", "false");
+  });
+});
+
+// Smooth reveal while scrolling
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+}
+
+// Floating Halloween particles
+const area = document.getElementById("particles");
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+if (!reducedMotion) {
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement("span");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (8 + Math.random() * 14) + "s";
+    p.style.animationDelay = (-Math.random() * 18) + "s";
+    area.appendChild(p);
+  }
+}
+
+// Copy CA only after a real address is added to the HTML
+document.getElementById("copy").addEventListener("click", async () => {
+  const ca = document.getElementById("ca").textContent.trim();
+  const status = document.getElementById("copyStatus");
+
+  if (!ca || ca === "Not announced yet") {
+    status.textContent =
+      "No contract address yet. Add the verified CA before copying.";
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(ca);
+    status.textContent = "Contract address copied.";
+  } catch {
+    status.textContent =
+      "Copy unavailable. Please copy the address manually.";
+  }
+});
+</script>
+</body>
+  </html>
+  
